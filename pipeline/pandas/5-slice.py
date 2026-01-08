@@ -5,5 +5,5 @@
 def slice(df):
     """ Slice the required rows """
 
-    df = df.loc[["High", "Low", "Close", "Volume_BTC"]].iloc[::60]
+    df = df[["High", "Low", "Close", "Volume_BTC"]].iloc[::60]
     return df
