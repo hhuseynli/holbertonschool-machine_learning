@@ -4,7 +4,7 @@
 
 def array(df):
     # Select last 10 rows
-    df = df.tail(10)
+    df = df[["High", "Close"]].tail(10)
 
     # Convert to ndarray
     arr = to_numpy(df)
