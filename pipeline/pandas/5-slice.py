@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-""" Slice a pandas DataFrame """
+"""60th rows"""
 
 
 def slice(df):
-    """ Slice the required rows """
-
-    df = df.loc[:, ["High", "Low", "Close", "Volume_BTC"]].iloc[::60]
-    return df
+    """60th rows"""
+    return df[['High', 'Low', 'Close', 'Volume_(BTC)']].iloc[::60]
