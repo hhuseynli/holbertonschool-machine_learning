@@ -1,4 +1,4 @@
-!/usr/bin/env python3
+#!/usr/bin/env python3
 """Docstring for 4-frequency.py."""
 import numpy as np
 
