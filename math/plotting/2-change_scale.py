@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+""" Plot exponential decay """
 import numpy as np
 import matplotlib.pyplot as plt
-""" Plot exponential decay """
 
 
 def change_scale():
