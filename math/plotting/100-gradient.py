@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 def gradient():
-    """ Add title, labels, and color bar to a scatter plot representing elevation."""
+    """ Add colors to scatter plot representing elevation."""
     np.random.seed(5)
     x = np.random.randn(2000) * 10
     y = np.random.randn(2000) * 10
