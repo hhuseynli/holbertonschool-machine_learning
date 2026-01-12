@@ -3,9 +3,6 @@
 
 
 def summation_i_squared(n):
-    """ let's use computational power to do this than formulas """
+    """ let's not use computational power"""
     """ because we're cool """
-    sum = 0
-    for i in range(1, n+1):
-        sum += i ** 2
-    return sum
+    return n*(n+1)*(2n+1)/6
