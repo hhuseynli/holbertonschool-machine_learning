@@ -11,7 +11,7 @@ def poly_integral(poly, C=0):
     elif len(poly) == 0:
         return None
     
-    inte = list(C)
+    inte = [C]
     for i in range(len(poly)):
         inte.append(poly[i] / (i+1))
     return inte
