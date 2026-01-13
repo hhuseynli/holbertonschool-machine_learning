@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
-""" Differentiate and get coefficients """
+"""function that derivative a polynomial f(x)"""
 
 
 def poly_derivative(poly):
-    """ Return derivative of a polynomial """
-    if not isinstance(poly, list):
+    """function to calculate a derivative of a poly"""
+
+    if type(poly) is not list:
         return None
-    diff = []
-    total = 0
-    for i in range(1, len(poly)):
-        coefficient = i * poly[i]
-        total += coefficient
-        diff.append(coefficient)
-    if total == 0:
+    elif not poly:
+        return None
+    elif len(poly) == 0:
+        return None
+    elif len(poly) == 1:
         return [0]
-    return diff
+    else:
+        power = [i for i in range(len(poly))]
+        df = [power[x] * poly[x] for x in range(1, len(poly))]
+        if len(list(df)) == 1:
+            return [0]
+        else:
+            return df
