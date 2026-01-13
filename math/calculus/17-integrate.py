@@ -10,6 +10,8 @@ def poly_integral(poly, C=0):
         return None
     elif len(poly) == 0:
         return None
+    elif len(poly) == 1:
+        return poly
     inte = [C]
     for i in range(len(poly)):
         coe = poly[i] / (i+1)
