@@ -9,7 +9,7 @@ def poly_derivative(poly):
     diff = []
     total = 0
     for i in range(1, len(poly)):
-        coefficent = i * poly[i]
+        coefficient = i * poly[i]
         total += coefficient
         diff.append(coefficient)
     if total == 0:
