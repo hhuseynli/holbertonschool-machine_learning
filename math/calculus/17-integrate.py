@@ -10,13 +10,13 @@ def poly_integral(poly, C=0):
         return None
     elif len(poly) == 0:
         return None
-    elif len(poly) == 1:
-        return poly
-    inte = [C]
+    elif type(C) is not int:
+        return None
+    elif poly == [0]:
+        return [C]
+
+    integral = [C]
     for i in range(len(poly)):
-        coe = poly[i] / (i+1)
-        if int(coe) == coe:
-            inte.append(int(coe))
-        else:
-            inte.append(coe)
-    return inte
+        x = poly[i] / (i + 1)
+        integral.append(int(x) if x.is_integer() else x)
+    return integral
