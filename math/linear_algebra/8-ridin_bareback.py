@@ -4,6 +4,8 @@
 
 def mat_mul(mat1, mat2):
     """ Get dot product with transverse """
+    if (len(mat1) == len(mat2[0])):
+        return None
     return [
         [
             sum(m[i] * n[i] for i in range(len(mat2)))
