@@ -17,4 +17,4 @@ def np_slice(matrix, axes={}):
         axes_slices[axis] = slice(*form)
 
     # Unpack slices to slice the matrix
-    return matrix[*axes_slices]
+    return matrix[tuple(axes_slices)]
