@@ -9,9 +9,9 @@ def np_slice(matrix, axes={}):
     for dim, size in enumerate(matrix.shape):
         if dim not in axes:
             axes[dim] = (size, )
-    axes_slices = list(matrix.shape)
 
     # Convert to slices
+    axes_slices = list(matrix.shape)
     for axis in axes:
         form = axes[axis]
         axes_slices[axis] = slice(*form)
