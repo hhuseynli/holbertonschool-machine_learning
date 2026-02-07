@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """ Find the inverse of a matrix """
 determinant = __import__("0-determinant").determinant
-adjugate = __import__("4-adjugate").adjugate
+adjugate = __import__("3-adjugate").adjugate
 
 
 def inverse(matrix):
+    """ Calculate the inverse """
     det = determinant(matrix)
     adj = adjugate(matrix)
     if det == 0:
