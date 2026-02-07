@@ -4,20 +4,20 @@
 
 def determinant(matrix):
     """ Validate and calculate """
-    # Check type
-    if not isinstance(matrix, list):
-        raise TypeError("matrix must be a list of lists")
-
-    # Check size before taking matrix[0]
-    if len(matrix) == 0:
-        raise TypeError("matrix must be a list of lists")
-
     row_n = len(matrix)
-    col_n = len(matrix[0])
 
     # Base case (before checking size to avoid errors)
     if matrix == [[]]:
         return 1
+
+    valid_rows = sum([isinstance(row, list) for row in matrix])
+
+    # Check type
+    if not isinstance(matrix, list) or row_n == 0 or \
+            valid_rows != row_n:
+        raise TypeError("matrix must be a list of lists")
+
+    col_n = len(matrix[0])
 
     # Single-numbered base case
     if row_n == 1 and col_n == 1:
