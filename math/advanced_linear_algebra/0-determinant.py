@@ -17,7 +17,10 @@ def determinant(matrix):
             valid_rows != row_n:
         raise TypeError("matrix must be a list of lists")
 
-    col_n = len(matrix[0])
+    # Check for jagged matrices
+    first_row = len(matrix[0])
+    eq_rows = sum([len(row) == first_row for row in matrix])
+    col_n = first_row if eq_rows == row_n else 0
 
     # Single-numbered base case
     if row_n == 1 and col_n == 1:
