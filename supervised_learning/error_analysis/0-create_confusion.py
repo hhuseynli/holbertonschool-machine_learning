@@ -12,5 +12,5 @@ def create_confusion_matrix(labels, logits):
     actual = np.argmax(labels, axis=1)
     prediction = np.argmax(logits, axis=1)
 
-    np.add.at(confusion, (true, pred), 1)
+    np.add.at(confusion, (actual, prediction), 1)
     return confusion
