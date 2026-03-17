@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import numpy as np
 """ Make a confusion matrix """
+import numpy as np
 
 
 def create_confusion_matrix(labels, logits):
