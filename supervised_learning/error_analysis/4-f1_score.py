@@ -6,4 +6,7 @@ sensitivity = __import__('1-sensitivity').sensitivity
 
 def f1_score(confusion):
     """ in: conf. matrix, out: f-score """
-    return 2 * (1 / precision(confusion) + 1 / sensitivity(confusion))
+    prec = precision(confusion)
+    sens = sensitivity(confusion)
+
+    return 2 * (prec + sens) / (prec * sens)
