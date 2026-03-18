@@ -6,5 +6,4 @@ sensitivity = __import__('1-sensitivity').sensitivity
 
 def f1_score(confusion):
     """ in: conf. matrix, out: f-score """
-    n = confusion.shape[0]
-    return n * (1 / precision(confusion) + 1 / sensitivity(confusion))
+    return 2 * (1 / precision(confusion) + 1 / sensitivity(confusion))
