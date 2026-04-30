@@ -65,17 +65,17 @@ class Neuron:
         Args:
             X -> numpy.ndarray of shape (nx, m)  = input data
             Y -> numpy.ndarray of shape (1, m) = correct output values
-            A -> numpy.ndarray of shape (1, m) = activated output of each neuron
+            A -> numpy.ndarray of shape (1, m) = output of neuron
 
         Returns:
             nothing -> updates parameters W and b
         """
         m = X.shape[0]
-        residuals = A-Y
-        dJ_dw = np.matmul(X, residuals.T) / m # (nx, m) @ (m, 1) -> (nx, 1)
+        residuals = A - Y
+        dJ_dw = np.matmul(X, residuals.T) / m  # (nx, m) @ (m, 1) -> (nx, 1)
         dJ_db = np.mean(residuals)
 
-        self.__W -= alpha * dJ_dw.T # (1, nx)
+        self.__W -= (alpha * dJ_dw).T  # (1, nx)
         self.__b -= alpha * dJ_db
 
     @property
