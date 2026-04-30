@@ -70,13 +70,12 @@ class Neuron:
         Returns:
             nothing -> updates parameters W and b
         """
-        m = X.shape[0]
-        residuals = A - Y
-        dJ_dw = np.matmul(X, residuals.T) / m  # (nx, m) @ (m, 1) -> (nx, 1)
-        dJ_db = np.mean(residuals)
-
-        self.__W -= (alpha * dJ_dw).T  # (1, nx)
-        self.__b -= alpha * dJ_db
+        m = Y.shape[1]
+        dz = A - Y
+        dW = np.matmul(X, dz.T) / m
+        db = np.sum(dz) / m
+        self.__W -= (alpha * dW).T
+        self.__b -= alpha * db
 
     @property
     def W(self):
