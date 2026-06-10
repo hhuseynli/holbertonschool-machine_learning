@@ -8,7 +8,7 @@ class NeuralNetwork:
     def __init__(self, nx, nodes):
         """ Args:
                 nx => number of input features
-                nodes => number of nodes in the hidden layer of the NN            
+                nodes => number of nodes in the hidden layer of the NN
         """
 
         # Input Validation
@@ -20,7 +20,7 @@ class NeuralNetwork:
             raise TypeError("nodes must be an integer")
         if nodes < 1:
             raise ValueError("nodes must be a positive integer")
-        
+
         # Initialize hidden layer
         self.W1 = np.random.randn(nodes, nx)
         self.b1 = np.zeros((nodes, 1))
