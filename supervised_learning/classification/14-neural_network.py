@@ -67,7 +67,7 @@ class NeuralNetwork:
         """ Evaluates the neural network's predictions """
         _, A = self.forward_prop(X)
         cost = self.cost(Y, A)
-        pred = (A >= 0.5).astype(int)
+        pred = np.where(A >= 0.5, 1, 0)
         return pred, cost
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
