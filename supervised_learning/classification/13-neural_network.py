@@ -71,14 +71,14 @@ class NeuralNetwork:
         return pred, cost
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
-        """ Calculates one pass of gradient descent on the neural network 
+        """ Calculates one pass of gradient descent on the neural networks
         Args:
         X -> ndarray (nx, m), where nx = features; m = examples
         Y -> ndarray (1, m) with the correct labels
         A1 -> ndarray (nodes, m) with the activations of the hidden layer
         A2 -> ndarray (1, m) with the activation of the output layer
         """
-        m = X.shape[1] # Number of training examples
+        m = X.shape[1]  # Number of training examples
 
         # 1. Output Layer Gradients
         dz2 = A2 - Y
@@ -96,7 +96,6 @@ class NeuralNetwork:
         self.__W1 -= alpha * dw1
         self.__b1 -= alpha * db1
 
-        
     @property
     def W1(self):
         return self.__W1
