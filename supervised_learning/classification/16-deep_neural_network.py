@@ -11,7 +11,7 @@ class DeepNeuralNetwork:
         if nx < 1:
             raise ValueError("nx must be a positive integer")
 
-        if not isinstance(layers, list) or len(layers) == 0:
+        if (not isinstance(layers, list)) or layers == []:
             raise TypeError("layer must be a list of positive integers")
         if (np.array(layers) > 0).sum() != len(layers):
             raise TypeError("layers must be a list of positive integers")
