@@ -4,6 +4,7 @@ import numpy as np
 
 
 class DeepNeuralNetwork:
+    """ A deep neural network consists of multiple hidden layers"""
     def __init__(self, nx, layers):
         if not isinstance(nx, int):
             raise TypeError("nx must be an integer")
@@ -24,7 +25,7 @@ class DeepNeuralNetwork:
                 prev = nx
             else:
                 prev = layers[layer-1]
-            W = np.random.randn(layers[layer], prev)*np.sqrt(2 / prev)
+            W = np.random.randn(layers[layer], prev) * np.sqrt(2 / prev)
             b = np.zeros((layers[layer], 1))
 
             self.weights[f"W{layer+1}"] = W
