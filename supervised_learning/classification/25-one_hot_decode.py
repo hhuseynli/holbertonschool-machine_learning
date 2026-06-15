@@ -1,4 +1,5 @@
-'''module documented'''
+#!/usr/bin/env python3
+"""One-hot decoding"""
 import numpy as np
 
 
