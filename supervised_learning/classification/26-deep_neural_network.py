@@ -2,7 +2,9 @@
 """Deep Neural Network"""
 import matplotlib.pyplot as plt
 import numpy as np
-import pickle, os
+import pickle
+import os
+
 
 class DeepNeuralNetwork:
     """ A deep neural network consists of multiple hidden layers """
@@ -101,7 +103,6 @@ class DeepNeuralNetwork:
 
         for i in range(iterations):
             A, cache = self.forward_prop(X)
-            
             if i % step == 0:
                 cost = self.cost(Y, A)
                 if verbose:
@@ -109,15 +110,15 @@ class DeepNeuralNetwork:
                 if graph:
                     steps_list.append(i)
                     costs_list.append(cost)
-                    
+
             self.gradient_descent(Y, cache, alpha)
 
         # Handle the evaluation and final recording at the last iteration
         final_A, final_cost = self.evaluate(X, Y)
-        
+
         if verbose:
             print(f"Cost after {iterations} iterations: {final_cost}")
-            
+
         if graph:
             steps_list.append(iterations)
             costs_list.append(final_cost)
@@ -130,6 +131,7 @@ class DeepNeuralNetwork:
         return final_A, final_cost
 
     def save(self, filename):
+        """ Saves a deep neural network """
         if not (".pkl" in filename):
             filename += ".pkl"
         with open(filename, "wb") as f:
@@ -137,9 +139,10 @@ class DeepNeuralNetwork:
 
     @staticmethod
     def load(filename):
+        """ Loads a deep neural network """
         if not os.path.exists(filename):
             return None
-        
+
         with open(filename, "rb") as f:
             obj = pickle.load(f)
         return obj
