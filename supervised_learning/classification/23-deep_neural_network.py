@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Deep Neural Network"""
+import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -77,11 +78,9 @@ class DeepNeuralNetwork:
                 A_prev_layer = cache[f"A{layer-1}"]
                 dZ = np.dot(Wl.T, dZ) * (A_prev_layer * (1 - A_prev_layer))
 
-    def train(self, X, Y, iterations=5000, alpha=0.05):
-        """
-        Trains the deep neural network by executing forward propagation
-        and gradient descent over a specified number of iterations.
-        """
+    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
+              graph=True, step=100):
+        """ Trains the deep neural network """
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
         if iterations <= 0:
@@ -91,11 +90,44 @@ class DeepNeuralNetwork:
         if alpha <= 0:
             raise ValueError("alpha must be positive")
 
-        for _ in range(iterations):
+        if verbose or graph:
+            if not isinstance(step, int):
+                raise TypeError("step must be an integer")
+            if step <= 0 or step > iterations:
+                raise ValueError("step must be positive and <= iterations")
+
+        steps_list = []
+        costs_list = []
+
+        for i in range(iterations):
             A, cache = self.forward_prop(X)
+            
+            if i % step == 0:
+                cost = self.cost(Y, A)
+                if verbose:
+                    print(f"Cost after {i} iterations: {cost}")
+                if graph:
+                    steps_list.append(i)
+                    costs_list.append(cost)
+                    
             self.gradient_descent(Y, cache, alpha)
 
-        return self.evaluate(X, Y)
+        # Handle the evaluation and final recording at the last iteration
+        final_A, final_cost = self.evaluate(X, Y)
+        
+        if verbose:
+            print(f"Cost after {iterations} iterations: {final_cost}")
+            
+        if graph:
+            steps_list.append(iterations)
+            costs_list.append(final_cost)
+            plt.plot(steps_list, costs_list, 'b-')
+            plt.xlabel('iteration')
+            plt.ylabel('cost')
+            plt.title('Training Cost')
+            plt.show()
+
+        return final_A, final_cost
 
     @property
     def L(self):
