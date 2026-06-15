@@ -2,8 +2,8 @@
 """
 Deep Neural Network for Multiclass Classification.
 
-Provides a robust implementation of an L-layer Deep Neural Network with 
-configurable hidden layer activations ('sig' or 'tanh') and a stable 
+Provides a robust implementation of an L-layer Deep Neural Network with
+configurable hidden layer activations ('sig' or 'tanh') and a stable
 Softmax output layer for multi-categorical processing.
 """
 import matplotlib.pyplot as plt
@@ -21,12 +21,17 @@ class DeepNeuralNetwork:
 
         Args:
             nx (int): Number of input features.
-            layers (list): Number of nodes in each layer of the network.
-            activation (str): Activation function for hidden layers ('sig' or 'tanh').
+            layers (list):
+            Number of nodes in each layer of the network.
+            activation (str):
+            Activation function for hidden layers ('sig' or 'tanh').
 
         Raises:
-            TypeError: If nx is not an int or layers is not a valid list of ints.
-            ValueError: If nx < 1, layers contains values <= 0, or activation is invalid.
+            TypeError:
+            If nx is not an int or layers is not a valid list of ints.
+
+            ValueError:
+            If nx < 1, layers contains values <= 0, or activation is invalid.
         """
         if not isinstance(nx, int):
             raise TypeError("nx must be an integer")
@@ -93,8 +98,11 @@ class DeepNeuralNetwork:
         Calculates the categorical cross-entropy loss.
 
         Args:
-            Y (numpy.ndarray): One-hot encoded actual labels of shape (classes, m).
-            A (numpy.ndarray): Output activations of the final layer of shape (classes, m).
+            Y (numpy.ndarray):
+            One-hot encoded actual labels of shape (classes, m).
+
+            A (numpy.ndarray):
+            Output activations of the final layer of shape (classes, m).
 
         Returns:
             float: Categorical cross-entropy cost.
@@ -110,12 +118,16 @@ class DeepNeuralNetwork:
         Evaluates the network's predictions against target labels.
 
         Args:
-            X (numpy.ndarray): Input data of shape (nx, m).
-            Y (numpy.ndarray): One-hot encoded labels of shape (classes, m).
+            X (numpy.ndarray):
+            Input data of shape (nx, m).
+
+            Y (numpy.ndarray):
+            One-hot encoded labels of shape (classes, m).
 
         Returns:
             tuple: (predictions, cost)
-                - predictions (numpy.ndarray): One-hot array of predicted labels.
+                - predictions (numpy.ndarray):
+                One-hot array of predicted labels.
                 - cost (float): Calculated loss value.
         """
         A, _ = self.forward_prop(X)
@@ -129,16 +141,21 @@ class DeepNeuralNetwork:
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """
-        Calculates one comprehensive backpropagation pass and updates parameters.
-
+        Calculates one comprehensive backpropagation
+        pass and updates parameters.
         Args:
-            Y (numpy.ndarray): One-hot encoded actual labels of shape (classes, m).
-            cache (dict): Dictionary tracking forward pass activation states.
-            alpha (float): Learning rate parameter magnitude.
+            Y (numpy.ndarray):
+            One-hot encoded actual labels of shape (classes, m).
+
+            cache (dict):
+            Dictionary tracking forward pass activation states.
+
+            alpha (float):
+            Learning rate parameter magnitude.
         """
         m = Y.shape[1]
         A_last = cache[f"A{self.__L}"]
-        
+
         # Base error signal for Cross-Entropy combined with Softmax
         dZ = A_last - Y
 
@@ -155,7 +172,7 @@ class DeepNeuralNetwork:
                     dz_activation = A_current_layer * (1 - A_current_layer)
                 elif self.__activation == "tanh":
                     dz_activation = 1 - A_current_layer ** 2
-                
+
                 dZ = np.dot(Wl.T, dZ) * dz_activation
 
             # Update structural parameter weights
@@ -169,7 +186,7 @@ class DeepNeuralNetwork:
 
         Args:
             X (numpy.ndarray): Input training data of shape (nx, m).
-            Y (numpy.ndarray): One-hot encoded training labels of shape (classes, m).
+            Y (numpy.ndarray): One-hot encoded training labels.
             iterations (int): Loop cycles to execute over.
             alpha (float): Hyperparameter learning rate scalar.
             verbose (bool): Toggles raw text matrix logs.
@@ -177,7 +194,8 @@ class DeepNeuralNetwork:
             step (int): Training steps between performance snapshots.
 
         Returns:
-            tuple: (predictions, cost) evaluated after final training execution.
+            tuple: (predictions, cost)
+            evaluated after final training execution.
         """
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
@@ -199,7 +217,6 @@ class DeepNeuralNetwork:
 
         for i in range(iterations):
             A, cache = self.forward_prop(X)
-            
             if i % step == 0:
                 cost = self.cost(Y, A)
                 if verbose:
@@ -253,7 +270,8 @@ class DeepNeuralNetwork:
 
     @property
     def cache(self):
-        """dict: Operational evaluation caching map capturing previous activations."""
+        """dict: Operational evaluation caching
+        map capturing previous activations."""
         return self.__cache
 
     @property
