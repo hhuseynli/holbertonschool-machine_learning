@@ -18,6 +18,8 @@ class DeepNeuralNetwork:
         self.__L = len(layers)
         self.__cache = {}
         self.__weights = {}
+        if activation not in  ['sigm', 'tanh']:
+            raise ValueError("activation must be 'sig' or 'tanh'")
         self.__activation = activation
         for layer in range(self.__L):
             if layers[layer] <= 0 or not (isinstance(layers[layer], int)):
@@ -92,7 +94,11 @@ class DeepNeuralNetwork:
 
             if layer > 1:
                 A_prev_layer = cache[f"A{layer-1}"]
-                dZ = np.dot(Wl.T, dZ) * (A_prev_layer * (1 - A_prev_layer))
+                if self.__activation == "sig":
+                    dz = (A_prev_layer * (1 - A_prev_layer))
+                elif self.__activation == "tanh":
+                    dz = 1 - A_prev_layer ** 2
+                dZ = np.dot(Wl.T, dZ) * dz
 
     def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
               graph=True, step=100):
