@@ -4,7 +4,7 @@ import numpy as np
 
 
 class DeepNeuralNetwork:
-    """ A deep neural network consists of multiple hidden layers"""
+    """ A deep neural network consists of multiple hidden layers """
     def __init__(self, nx, layers):
         if not (isinstance(nx, int)):
             raise TypeError("nx must be an integer")
@@ -16,7 +16,7 @@ class DeepNeuralNetwork:
         self.__cache = {}
         self.__weights = {}
         for layer in range(self.__L):
-            if layers[layer] <= 0 or not (isinstance(layer, int)):
+            if layers[layer] <= 0 or not (isinstance(layers[layer], int)):
                 raise TypeError("layers must be a list of positive integers")
             if layer == 0:
                 prev = nx
@@ -25,8 +25,8 @@ class DeepNeuralNetwork:
             W = (np.random.randn(layers[layer], prev) *
                  np.sqrt(2 / prev))
             b = np.zeros((layers[layer], 1))
-            self.weights.update({f"W{layer+1}": W})
-            self.weights.update({f"b{layer+1}": b})
+            self.__weights.update({f"W{layer+1}": W})
+            self.__weights.update({f"b{layer+1}": b})
 
     def forward_prop(self, X):
         """ Calculates the activation of each neuron
@@ -54,7 +54,29 @@ class DeepNeuralNetwork:
         A = self.forward_prop(X)[0]
         preds = np.where(A >= 0.5, 1, 0)
         return preds, self.cost(Y, A)
-    
+
+    def gradient_descent(self, Y, cache, alpha=0.05):
+        """ Calculates one pass of gradient descent on the neural network """
+        m = Y.shape[1]
+        weights_copy = self.__weights.copy()
+        for layer in range(self.__L, 0, -1):
+            A = cache[f"A{layer}"]
+            A_prev = cache[f"A{layer-1}"]
+
+            if layer == self.__L:
+                # Output layer gradient for binary cross-entropy + sigmoid
+                dZ = A - Y
+            else:
+                # Hidden layer gradient using the W from layer + 1
+                W_next = weights_copy[f"W{layer+1}"]
+                dZ = (W_next.T @ dZ) * (A * (1 - A))
+
+            dW = (1 / m) * (dZ @ A_prev.T)
+            db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
+
+            self.__weights[f"W{layer}"] -= alpha * dW
+            self.__weights[f"b{layer}"] -= alpha * db
+
     @property
     def L(self):
         return self.__L
