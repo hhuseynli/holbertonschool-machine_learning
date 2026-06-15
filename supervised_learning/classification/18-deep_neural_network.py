@@ -15,7 +15,6 @@ class DeepNeuralNetwork:
         self.__L = len(layers)
         self.__cache = {}
         self.__weights = {}
-        # L = 3     1, 2
         for layer in range(self.__L):
             if layers[layer] <= 0 or not (isinstance(layer, int)):
                 raise TypeError("layers must be a list of positive integers")
@@ -40,8 +39,8 @@ class DeepNeuralNetwork:
         for layer in range(self.__L+1):
             self.__cache[f"A{layer}"] = prev
             if layer != self.__L:
-                z = self.__weights[f"W{layer+1}"] @ prev
-                + self.__weights[f"b{layer+1}"]
+                z = self.__weights[f"W{layer+1}"] @ prev \
+                    + self.__weights[f"b{layer+1}"]
                 prev = self.sigmoid(z)
         return self.__cache[f"A{self.__L}"], self.__cache
 
