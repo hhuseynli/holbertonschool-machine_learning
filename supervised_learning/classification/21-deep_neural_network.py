@@ -79,7 +79,6 @@ class DeepNeuralNetwork:
                 A_prev_layer = cache[f"A{layer-1}"]
                 dZ = np.dot(Wl.T, dZ) * (A_prev_layer * (1 - A_prev_layer))
 
-
     @property
     def L(self):
         return self.__L
