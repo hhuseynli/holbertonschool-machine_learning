@@ -47,7 +47,7 @@ class DeepNeuralNetwork:
             if layer == self.__L - 1:
                 prev = self.softmax(z)
             else:
-                if self.__activation == "sigmoid":
+                if self.__activation == "sig":
                     prev = self.sigmoid(z)
                 elif self.__activation == "tanh":
                     prev = np.tanh(z)
@@ -164,6 +164,10 @@ class DeepNeuralNetwork:
     @property
     def L(self):
         return self.__L
+
+    @property
+    def activation(self):
+        return self.__activation
 
     @property
     def cache(self):
