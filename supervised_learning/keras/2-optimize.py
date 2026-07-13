@@ -15,7 +15,7 @@ def optimize_model(network, alpha, beta1, beta2):
     Returns: None
     """
     network.compile(
-        loss=K.losses.CategoricalCrossentropy(),
+        loss='categorical_crossentropy',
         optimizer=K.optimizers.Adam(learning_rate=alpha,
                                     beta_1=beta1,
                                     beta_2=beta2),
