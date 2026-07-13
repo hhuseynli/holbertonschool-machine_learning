@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Build a sequential neural network"""
 
-import keras
+import tensorflow.keras as K
 
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
@@ -15,26 +15,26 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
 
     Returns: the model
     """
-    model = keras.Sequential()
+    model = K.Sequential()
     for i in range(len(layers)):
         if i == 0:
             model.add(
-                keras.layers.Dense(
+                K.layers.Dense(
                     layers[i],
                     activation=activations[i],
-                    kernel_regularizer=keras.regularizers.l2(lambtha),
+                    kernel_regularizer=K.regularizers.l2(lambtha),
                     input_shape=(nx,)
                 )
             )
         else:
             model.add(
-                keras.layers.Dense(
+                K.layers.Dense(
                     layers[i],
                     activation=activations[i],
-                    kernel_regularizer=keras.regularizers.l2(lambtha)
+                    kernel_regularizer=K.regularizers.l2(lambtha)
                 )
             )
         
         if i != len(layers) - 1:
-            model.add(keras.layers.Dropout(1 - keep_prob))
+            model.add(K.layers.Dropout(1 - keep_prob))
     return model
