@@ -1,33 +1,40 @@
 #!/usr/bin/env python3
-"""Docstring for 0-sequential.py."""
+""" Build a sequential neural network"""
 
-import tensorflow.keras as K
+import keras
 
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
-    """Docstring for build_model."""
-    model = K.Sequential()
+    """
+    Args:
+    nx -> number of input features
+    layers -> lsit with number of nodes at each layer
+    activations -> list with activations at each layer
+    lambtha -> regularization parameter
+    keep_prob -> probability of dropout
 
+    Returns: the model
+    """
+    model = keras.Sequential()
     for i in range(len(layers)):
         if i == 0:
             model.add(
-                K.layers.Dense(
+                keras.layers.Dense(
                     layers[i],
                     activation=activations[i],
-                    kernel_regularizer=K.regularizers.l2(lambtha),
+                    kernel_regularizer=keras.regularizers.l2(lambtha),
                     input_shape=(nx,)
                 )
             )
         else:
             model.add(
-                K.layers.Dense(
+                keras.layers.Dense(
                     layers[i],
                     activation=activations[i],
-                    kernel_regularizer=K.regularizers.l2(lambtha)
+                    kernel_regularizer=keras.regularizers.l2(lambtha)
                 )
             )
-
+        
         if i != len(layers) - 1:
-            model.add(K.layers.Dropout(1 - keep_prob))
-
+            model.add(keras.layers.Dropout(1 - keep_prob))
     return model
