@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Momentum implemented using numpy """
 
-import tensorflow.keras as K
+import tensorflow as tf
 
 
 def create_momentum_op(alpha, beta1):
@@ -12,4 +12,4 @@ def create_momentum_op(alpha, beta1):
 
     Returns: optimizer (keras)
     """
-    return K.optimizers.SGD(learning_rate=alpha, momentum=beta1)
+    return tf.keras.optimizers.SGD(learning_rate=alpha, momentum=beta1)
